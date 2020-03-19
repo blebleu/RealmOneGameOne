@@ -12,14 +12,38 @@ public class TileBehavior : MonoBehaviour
 
     public Material tileDefaultMaterial;
     public Material tileMouseOverMaterial;
+    public Material tileBlockMaterial;
+    public GameObject testBuilding;
+
+
+    private GameObject currentBuilding;
     private int row;
     private int col;
     private bool mousedOver;
+    private bool isBlocking = false;
 
     // Start is called before the first frame update
     void Start()
     {
         OnMouseExit();
+        getBuildingStatus();
+        setTileMaterial(tileDefaultMaterial);
+    }
+
+    private void Update()
+    {
+        //Left click will change the tile to one that blocks hero movement
+        if (Input.GetMouseButtonDown(0) && mousedOver == true)
+        {
+            isBlocking = true;
+            getBuildingStatus();
+        }
+        //Right click will change the tile to one that does not blocks hero movement
+        if (Input.GetMouseButtonDown(1) && mousedOver == true)
+        {
+            isBlocking = false;
+            getBuildingStatus();
+        }
     }
 
     void OnMouseEnter() {
@@ -31,6 +55,18 @@ public class TileBehavior : MonoBehaviour
     void OnMouseExit() {
         setTileMaterial(tileDefaultMaterial);
         setMousedOver(false);
+    }
+
+    void getBuildingStatus()
+    {
+        if(isBlocking == false && currentBuilding != null)
+        {
+            Destroy(currentBuilding);
+        }
+        else if(isBlocking == true && currentBuilding == null)
+        {
+            currentBuilding = Instantiate(testBuilding, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        }
     }
 
     void setTileMaterial(Material material) {

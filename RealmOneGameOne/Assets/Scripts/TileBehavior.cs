@@ -15,11 +15,32 @@ public class TileBehavior : MonoBehaviour
     private int row;
     private int col;
     private bool mousedOver;
+    private TileTypeEnum typeEnum;
 
     // Start is called before the first frame update
     void Start()
     {
         OnMouseExit();
+    }
+
+    void init(TileTypeEnum type) {
+        this.typeEnum = type;
+
+        switch (typeEnum)
+        {
+            case TileTypeEnum.GROUND:
+                //do something
+                break;
+            case TileTypeEnum.BONE_PILE:
+                //do something
+                break;
+            case TileTypeEnum.RIVER:
+                //do something
+                break;
+            case TileTypeEnum.STALAGMITE:
+                //do something
+                break;
+        }
     }
 
     void OnMouseEnter() {
@@ -59,5 +80,12 @@ public class TileBehavior : MonoBehaviour
     }
     public void setMousedOver(bool mousedOver) {
         this.mousedOver = mousedOver;
+    }
+
+    public TileTypeEnum getTypeEnum() {
+        return this.typeEnum;
+    }
+    public void setTypeEnum(TileTypeEnum typeEnum){
+        this.typeEnum = typeEnum;
     }
 }

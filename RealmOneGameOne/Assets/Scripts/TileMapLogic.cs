@@ -17,8 +17,8 @@ public class TileMapLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 1; i< numRows; i++) {
-            for (int j = 1; j < numCols; j++) {
+        for (int i = 1; i<= numRows; i++) {
+            for (int j = 1; j <= numCols; j++) {
 
                 // create new tile
                 GameObject tileIteration = Instantiate(tile);
@@ -43,8 +43,10 @@ public class TileMapLogic : MonoBehaviour
     }*/
 
     private void setTilePosition(GameObject tile, int i, int j) {
-        float xPos = numCols * tileWidth * -0.5f + tileWidth * (i - 1);
-        float yPos = numRows * tileHeight * -0.5f + tileHeight * (j - 1);
+        float xPos = -1f*(numCols * (tileWidth / 2f) - (tileWidth * (j - 0.5f)));
+        float yPos = numRows * (tileHeight / 2f) - (tileHeight * (i - 0.5f));
+        //float xPos = numCols * tileWidth * -0.5f + tileWidth * (i - 1);
+        //float yPos = numRows * tileHeight * -0.5f + tileHeight * (j - 1);
         tile.transform.position = new Vector3(xPos, 0, yPos);
     }
 

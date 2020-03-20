@@ -110,3 +110,6 @@ MonoBehaviour:
   tileDefaultMaterial: {fileID: 2100000, guid: 3fce03ebfc0a6a54e882ba40a64d18c4, type: 2}
   tileMouseOverMaterial: {fileID: 2100000, guid: 1453c85f871154f49867832159355768,
     type: 2}
+  tileBlockMaterial: {fileID: 2100000, guid: 2826a31d303068842ab1fcdccd96d76c, type: 2}
+  testBuilding: {fileID: 3898425805008581172, guid: 07bd14711acc3034cb6dbf70be874db5,
+    type: 3}

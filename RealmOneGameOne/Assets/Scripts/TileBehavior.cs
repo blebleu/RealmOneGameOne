@@ -69,7 +69,7 @@ public class TileBehavior : MonoBehaviour
 
     void OnMouseEnter() {
         setTileMaterial(tileMouseOverMaterial);
-        Debug.Log("---Mouse Over Event---\nRow: " + row.ToString() + "\nColumn: " + col.ToString());
+        //Debug.Log("---Mouse Over Event---\nRow: " + row.ToString() + "\nColumn: " + col.ToString());
         setMousedOver(true);
     }
 

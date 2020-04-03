@@ -151,8 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numCols: 10
-  numRows: 20
+  numRows: 10
   tile: {fileID: 5096506847081044359, guid: 516b9426d2231504d927c9ee3ddc259e, type: 3}
+  enemyTest: {fileID: 2457336687896348544, guid: 44d0496a1c1322a45afc202a0dd683da,
+    type: 3}
 --- !u!4 &1050831133
 Transform:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class TileMapLogic : MonoBehaviour
 
     public GameObject tile;
 
+    // REMOVE THIS LATER, THIS IS JUST TO TEST ENEMY MOVEMENT
+    public GameObject enemyTest;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +40,16 @@ public class TileMapLogic : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
-        
-    }*/
+        // THIS IS JUST A TEST OF SUMMONING ENEMIES AND GETTING THEM TO RECOGIZE THE MAP LOGIC
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GameObject enemyInstance = Instantiate(enemyTest);
+            // I think this isn't getting called properly.
+            enemyInstance.GetComponent<MovementTest>().setTileLogicObject(this);
+            Debug.Log("Space Pressed, should set object");
+        }
+    }
 
     private void setTilePosition(GameObject tile, int i, int j) {
         float xPos = -1f*(numCols * (tileWidth / 2f) - (tileWidth * (j - 0.5f)));
@@ -50,7 +59,7 @@ public class TileMapLogic : MonoBehaviour
         tile.transform.position = new Vector3(xPos, 0, yPos);
     }
 
-    private TileBehavior getTileBehaviorByGridPosition(int i, int j) {
+    public TileBehavior getTileBehaviorByGridPosition(int i, int j) {
         return positionMap[new Vector2(i, j)];
     }
 }

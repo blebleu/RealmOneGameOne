@@ -9,6 +9,8 @@ public class simpleHealthBar : MonoBehaviour
 public Slider healthBar;
 PlayerHealth playerHealth;
 
+//
+
 void Start()
     {
 

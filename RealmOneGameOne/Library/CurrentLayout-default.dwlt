@@ -23,6 +23,7 @@ MonoBehaviour:
   m_Title: Game - RealmOneGameOne
 <<<<<<< HEAD
   m_RootView: {fileID: 4}
+<<<<<<< Updated upstream
   m_MinSize: {x: 875, y: 300}
 =======
   m_Title: 
@@ -33,6 +34,9 @@ MonoBehaviour:
   m_RootView: {fileID: 5}
   m_MinSize: {x: 875, y: 542}
 >>>>>>> HeroMovement
+=======
+  m_MinSize: {x: 875, y: 442}
+>>>>>>> Stashed changes
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -138,11 +142,15 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   m_MinSize: {x: 875, y: 300}
 =======
   m_MinSize: {x: 875, y: 542}
 >>>>>>> featureHUD
+=======
+  m_MinSize: {x: 875, y: 442}
+>>>>>>> Stashed changes
   m_MaxSize: {x: 10000, y: 10000}
 <<<<<<< HEAD
 --- !u!114 &3
@@ -234,12 +242,17 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
   m_MinSize: {x: 908, y: 392}
   m_MaxSize: {x: 22003, y: 14042}
+=======
+  m_MinSize: {x: 911, y: 392}
+  m_MaxSize: {x: 22006, y: 14042}
+>>>>>>> Stashed changes
   vertical: 0
-  controlID: 3873
+  controlID: 96
 --- !u!114 &8
 =======
   m_MinSize: {x: 679, y: 492}
@@ -286,11 +299,18 @@ MonoBehaviour:
 <<<<<<< HEAD
     width: 1644
     height: 947
+<<<<<<< Updated upstream
   m_MinSize: {x: 401, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
 <<<<<<< HEAD
   controlID: 3915
+=======
+  m_MinSize: {x: 635, y: 392}
+  m_MaxSize: {x: 18005, y: 14042}
+  vertical: 1
+  controlID: 97
+>>>>>>> Stashed changes
 --- !u!114 &9
 =======
     width: 1511
@@ -337,11 +357,18 @@ MonoBehaviour:
 <<<<<<< HEAD
     width: 1644
     height: 593
+<<<<<<< Updated upstream
   m_MinSize: {x: 401, y: 221}
   m_MaxSize: {x: 8001, y: 4021}
   vertical: 0
 <<<<<<< HEAD
   controlID: 3916
+=======
+  m_MinSize: {x: 635, y: 271}
+  m_MaxSize: {x: 18005, y: 10021}
+  vertical: 0
+  controlID: 98
+>>>>>>> Stashed changes
 --- !u!114 &10
 =======
     width: 1511
@@ -451,8 +478,8 @@ MonoBehaviour:
     y: 0
     width: 223
     height: 593
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -546,9 +573,15 @@ MonoBehaviour:
     y: 0
     width: 276
     height: 947
+<<<<<<< Updated upstream
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
+=======
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 22}
+>>>>>>> Stashed changes
   m_Panes:
   - {fileID: 21}
   m_Selected: 0
@@ -659,6 +692,7 @@ MonoBehaviour:
     m_DrawArea:
       serializedVersion: 2
       x: 0
+<<<<<<< Updated upstream
       y: 21
 <<<<<<< HEAD
       width: 1016
@@ -671,19 +705,30 @@ MonoBehaviour:
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 960, y: 453.5}
 >>>>>>> featureHUD
+=======
+      y: 0
+      width: 1016
+      height: 572
+    m_Scale: {x: 0.7447917, y: 0.7447917}
+    m_Translation: {x: 507.99997, y: 286}
+>>>>>>> Stashed changes
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< Updated upstream
 <<<<<<< HEAD
       x: -708.0653
+=======
+      x: -682.0699
+>>>>>>> Stashed changes
       y: -384
-      width: 1416.1306
+      width: 1364.1398
       height: 768
     m_MinimalGUI: 1
-  m_defaultScale: 0.71744794
+  m_defaultScale: 0.7447917
   m_LastWindowPixelSize: {x: 1016, y: 572}
 =======
       x: -960
@@ -764,9 +809,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
     m_SelectedIDs: dc330000
     m_LastClickedID: 13276
     m_ExpandedIDs: 00000000da330000dc330000de330000e0330000e233000000ca9a3b
+=======
+    m_SelectedIDs: e0330000
+    m_LastClickedID: 13280
+    m_ExpandedIDs: 00000000d8330000da330000dc330000de330000e033000000ca9a3b
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -794,7 +845,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000da330000dc330000de330000e0330000e2330000
+=======
+    m_ExpandedIDs: 00000000d8330000da330000dc330000de330000e0330000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -821,7 +876,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -993,7 +1048,7 @@ MonoBehaviour:
 <<<<<<< HEAD
     m_Target: {x: -0.118133344, y: 0.6989956, z: -0.11877053, w: -0.6952313}
     speed: 2
-    m_Value: {x: -0.11813315, y: 0.6989944, z: -0.11877033, w: -0.6952302}
+    m_Value: {x: -0.118133344, y: 0.6989956, z: -0.11877053, w: -0.6952313}
   m_Size:
     m_Target: 22
     speed: 2

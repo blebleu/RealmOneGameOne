@@ -18,14 +18,11 @@ public class MovementTest : MonoBehaviour
 
     // tileSequence defines the sequence of tiles to traverse. 
     // For example: If we want the player to move from (1,1) to (1,2) then to (2,2), then tileSequence would be [ (1,1) , (1,2) , (2,2) ].
-    public Vector2[] tileSequence;
 
     // currentPlaceInTileSequence just keeps track of how far in the sequence you are. In the above example, if the player was moving to (1,2), then this value would be 1.
     private int currentPlaceInTileSequence;
 
     private Quaternion travelToNewPointRotation;
-
-    private TileMapLogic mapLogic;
 
     private Vector3 currentMoveToLocation;
 
@@ -33,16 +30,12 @@ public class MovementTest : MonoBehaviour
     void Start()
     {
         currentPlaceInTileSequence = 0;
+        setNextMoveToLocation();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (mapLogic == null) {
-            //Debug.Log("TileMap is still null");
-            return;
-        }
-
         // if hero has reached new destination
         if (Vector3.Distance(transform.position, currentMoveToLocation) < 1.0f)
         {
@@ -66,24 +59,18 @@ public class MovementTest : MonoBehaviour
     }
 
     public void setNextMoveToLocation() {
-        if (mapLogic == null) {
-            return;
-        }
-
         // set next moveto location
-        Vector2 nextTileCoord = tileSequence[currentPlaceInTileSequence];
+        Vector2 nextTileCoord = GameController.currentPath[currentPlaceInTileSequence];
+        if (nextTileCoord == null) {
+            Debug.Log("HIT DESTINATION");
+            Destroy(gameObject);
+        }
         // gets current moveto location by getting the specific tile at that grid coordinate and grabbing its position.
-        currentMoveToLocation = mapLogic
+        currentMoveToLocation = TileMapLogic
             .getTileBehaviorByGridPosition((int)nextTileCoord[0], (int)nextTileCoord[1])
             .transform
             .position;
 
         currentPlaceInTileSequence++;
-    }
-
-    public void setTileLogicObject(TileMapLogic logic) {
-        Debug.Log("Tile Map Object was Set");
-        mapLogic = logic;
-        setNextMoveToLocation();
     }
 }

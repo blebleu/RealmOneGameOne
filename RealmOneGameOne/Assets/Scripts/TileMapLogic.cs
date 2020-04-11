@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using GameController;
 
 public class TileMapLogic : MonoBehaviour
 {
-    private Dictionary<Vector2, TileBehavior> positionMap = new Dictionary<Vector2, TileBehavior>();
+    //private Dictionary<Vector2, TileBehavior> positionMap = new Dictionary<Vector2, TileBehavior>();
     public int numCols = 10;
     public int numRows = 10;
 
@@ -33,10 +34,14 @@ public class TileMapLogic : MonoBehaviour
                 // set position
                 setTilePosition(tileIteration, i, j);
                 // put in map for reference
-                positionMap.Add(new Vector2(i, j), tileBehavior);
+                GameController.positionMap.Add(new Vector2(i, j), tileBehavior);
+               
                
             }
         }
+
+        HeroPathing pathing = new HeroPathing();
+        GameController.currentPath = GameController.pathing.GetPath();
     }
 
     // Update is called once per frame
@@ -44,10 +49,7 @@ public class TileMapLogic : MonoBehaviour
     {
         // THIS IS JUST A TEST OF SUMMONING ENEMIES AND GETTING THEM TO RECOGIZE THE MAP LOGIC
         if (Input.GetKeyDown(KeyCode.Space)) {
-            GameObject enemyInstance = Instantiate(enemyTest);
-            // I think this isn't getting called properly.
-            enemyInstance.GetComponent<MovementTest>().setTileLogicObject(this);
-            Debug.Log("Space Pressed, should set object");
+            Instantiate(enemyTest);
         }
     }
 
@@ -59,7 +61,15 @@ public class TileMapLogic : MonoBehaviour
         tile.transform.position = new Vector3(xPos, 0, yPos);
     }
 
-    public TileBehavior getTileBehaviorByGridPosition(int i, int j) {
-        return positionMap[new Vector2(i, j)];
+    public static TileBehavior getTileBehaviorByGridPosition(int i, int j) {
+        TileBehavior returnTileBehavior = null;
+        try
+        {
+            returnTileBehavior = GameController.positionMap[new Vector2(i, j)];
+        }
+        catch (KeyNotFoundException e) {
+            return null;
+        }
+        return returnTileBehavior;
     }
 }

@@ -14,14 +14,14 @@ public class TileBehavior : MonoBehaviour
     public Material tileMouseOverMaterial;
     public Material tileBlockMaterial;
     public GameObject testBuilding;
-
+    public bool isHeroDestination = false;
+    public bool isBlocking = false;
 
     private GameObject currentBuilding;
     private int row;
     private int col;
     private bool mousedOver;
     private TileTypeEnum typeEnum;
-    private bool isBlocking = false;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +58,9 @@ public class TileBehavior : MonoBehaviour
         {
             isBlocking = true;
             getBuildingStatus();
+
+            GameController.currentPath.Clear();
+            GameController.currentPath= GameController.pathing.GetPath();
         }
         //Right click will change the tile to one that does not blocks hero movement
         if (Input.GetMouseButtonDown(1) && mousedOver == true)

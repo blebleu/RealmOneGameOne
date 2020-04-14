@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class HeroPathing : MonoBehaviour
+public class HeroPathing
 {
     /*
     * Author: Brent
@@ -21,27 +21,29 @@ public class HeroPathing : MonoBehaviour
      */
 
 
-
     //test map console 
-    string[] map = new string[]
-    {
-        "+------+",
-        "|      |",
-        "|A X   |",
-        "|XXX   |",
-        "|  XX X|",
-        "| B    |",
-        "|      |",
-        "+------+",
-    };
+    //string[] map = new string[]
+    //{
+    //    "+------+",
+    //    "|      |",
+    //    "|A X   |",
+    //    "|XXX   |",
+    //    "|  XX X|",
+    //    "| B    |",
+    //    "|      |",
+    //    "+------+",
+    //};
+
+
 
 
     Location current;
-    Location start = new Location { X = 0, Y = 0 };
-    Location target = new Location { X = 10, Y = 10 };
+    Location start = new Location { X = 1, Y = 1 };
+    Location target = new Location { X = 6, Y = 6 };
     List<Location> openList = new List<Location>();
     List<Location> closedList = new List<Location>();
     int g = 0;
+    
 
     class Location
     {
@@ -56,20 +58,13 @@ public class HeroPathing : MonoBehaviour
         public Location Parent;
     }
 
-
-    void Start()
-    {
-        openList.Add(start);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public List<Vector2> GetPath()
     {
+        openList.Clear();
+        closedList.Clear();
+
+        openList.Add(start);
+        List<Vector2> returnList = new List<Vector2>();
         while (openList.Count > 0)
         {
             // get the square with the lowest F score
@@ -85,7 +80,7 @@ public class HeroPathing : MonoBehaviour
             // if we added the destination to the closed list, we've found a path
             if (closedList.FirstOrDefault(loc => loc.X == target.X && loc.Y == target.Y) != null)
                 break;
-            var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y, map);
+            var adjacentSquares = GetWalkableAdjacentSquares(current.X, current.Y);
             g++;
 
 
@@ -122,9 +117,26 @@ public class HeroPathing : MonoBehaviour
                 }
             }
         }
-        return List<>;
+
+        while (current != null) {
+            returnList.Add(new Vector2(current.Y, current.X));
+            current = current.Parent;
+        }
+        returnList.Reverse();
+        //Debug.Log("Finished Generating Path");
+        //Debug.Log("Open List Size: " + openList.Count);
+        //openList.ForEach(loc => returnList.Add(new Vector2(loc.Y, loc.X)));
+
+        //foreach (Location location in closedList) {
+        //    Debug.Log("[ " + location.Y + "," + location.X + " ]");
+        //}
+
+        return returnList;
     }
-    static List<Location> GetWalkableAdjacentSquares(int x, int y, string[] map)
+
+
+
+    static List<Location> GetWalkableAdjacentSquares(int x, int y)
     {
             var proposedLocations = new List<Location>()
         {
@@ -135,8 +147,15 @@ public class HeroPathing : MonoBehaviour
         };
 
         return proposedLocations.Where(
-            loc => map[loc.Y][loc.X] == ' ' || map[loc.Y][loc.X] == 'B').ToList();
+
+            loc => TileMapLogic.getTileBehaviorByGridPosition(loc.Y,loc.X)!=null &&
+            (!TileMapLogic.getTileBehaviorByGridPosition(loc.Y, loc.X).isBlocking || TileMapLogic.getTileBehaviorByGridPosition(loc.Y, loc.X).isHeroDestination)
+
+            ).ToList();
+
+            //loc => map[loc.Y][loc.X] == ' ' || map[loc.Y][loc.X] == 'B').ToList();
     }
+
     static int ComputeHScore(int x, int y, int targetX, int targetY)
     {
         return Mathf.Abs(targetX - x) + Mathf.Abs(targetY - y);

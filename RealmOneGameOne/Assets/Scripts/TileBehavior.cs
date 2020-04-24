@@ -12,6 +12,7 @@ public class TileBehavior : MonoBehaviour
 
     public Material tileDefaultMaterial;
     public Material tileMouseOverMaterial;
+    public Material tileMouseOverMaterialBadLocation;
     public Material tileBlockMaterial;
     public GameObject testBuilding;
     public bool isHeroDestination = false;
@@ -53,27 +54,68 @@ public class TileBehavior : MonoBehaviour
 
     private void Update()
     {
-        //Left click will change the tile to one that blocks hero movement
-        if (Input.GetMouseButtonDown(0) && mousedOver == true)
-        {
-            isBlocking = true;
-            getBuildingStatus();
+        if (mousedOver) {
+            if (isValidPlaceLocation())
+            {
+                setTileMaterial(tileMouseOverMaterial);
+                //Left click will change the tile to one that blocks hero movement
+                if (Input.GetMouseButtonDown(0))
+                {
 
-            GameController.currentPath.Clear();
-            GameController.currentPath= GameController.pathing.GetPath();
+                        // create building, set to blocking
+                        isBlocking = true;
+                        getBuildingStatus();
+
+                    if (currentBuilding != null) {
+                        setTileMaterial(tileDefaultMaterial);
+                    }
+
+                        // update enemies paths.
+                        foreach (GameObject enemy in GameController.enemies)
+                        {
+                            enemy.GetComponent<MovementTest>().updateMyPath();
+                        }
+
+                        // update global starting path
+                        GameController.currentPath.Clear();
+                        GameController.currentPath = GameController.pathing.GetPath();
+
+                }
+            }
+            else
+            {
+                if (currentBuilding == null) {
+                    setTileMaterial(tileMouseOverMaterialBadLocation);
+                }
+                
+            }
+
+            //Right click will change the tile to one that does not blocks hero movement
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (currentBuilding != null)
+                {
+                    isBlocking = false;
+                    getBuildingStatus();
+                    foreach (GameObject enemy in GameController.enemies)
+                    {
+                        enemy.GetComponent<MovementTest>().updateMyPath();
+                    }
+                    GameController.currentPath.Clear();
+                    GameController.currentPath = GameController.pathing.GetPath();
+                }
+
+            }
+
         }
-        //Right click will change the tile to one that does not blocks hero movement
-        if (Input.GetMouseButtonDown(1) && mousedOver == true)
-        {
-            isBlocking = false;
-            getBuildingStatus();
-        }
+
     }
 
     void OnMouseEnter() {
-        setTileMaterial(tileMouseOverMaterial);
-        //Debug.Log("---Mouse Over Event---\nRow: " + row.ToString() + "\nColumn: " + col.ToString());
         setMousedOver(true);
+
+        //Debug.Log("---Mouse Over Event---\nRow: " + row.ToString() + "\nColumn: " + col.ToString());
+        
     }
 
     void OnMouseExit() {
@@ -126,5 +168,36 @@ public class TileBehavior : MonoBehaviour
     }
     public void setTypeEnum(TileTypeEnum typeEnum){
         this.typeEnum = typeEnum;
+    }
+
+
+    private bool isValidPlaceLocation() {
+        Vector2 thisTilePosition = new Vector2(row, col);
+
+        // can't put a building if there's already a building
+        if (currentBuilding != null) {
+            return false;
+        }
+
+        // if there are any enemies:
+        if (GameController.enemies.ToArray().Length > 0) {
+
+            // For each enemy, see if enemy is moving to or from the location you're trying to put a building.
+            //  If an enemy is moving to or from that spot, you can't put a building there. 
+            foreach (GameObject enemy in GameController.enemies)
+            {
+                //Debug.Log("Last Tile Hit: " + enemy.GetComponent<MovementTest>().getLastTileHitInPath());
+                //Debug.Log("Next Tile Hit: " + enemy.GetComponent<MovementTest>().getNextTileInPath());
+
+                if (enemy.GetComponent<MovementTest>().getLastTileHitInPath() == thisTilePosition ||
+                    enemy.GetComponent<MovementTest>().getNextTileInPath() == thisTilePosition)
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
     }
 }

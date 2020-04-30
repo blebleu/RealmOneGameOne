@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18084976ccf6024497a284dac59d250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCols: 10
+  numCols: 15
   numRows: 10
   tile: {fileID: 5096506847081044359, guid: 516b9426d2231504d927c9ee3ddc259e, type: 3}
 --- !u!4 &1050831133

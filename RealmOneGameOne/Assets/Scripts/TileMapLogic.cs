@@ -37,8 +37,8 @@ public class TileMapLogic : MonoBehaviour
             }
         }
 
-        HeroPathing pathing = new HeroPathing();
-        GameController.currentPath = GameController.pathing.GetPath();
+        //HeroPathing pathing = new HeroPathing();
+        GameController.currentPath = PathingLogic_Static.GetPath();
     }
 
     // Update is called once per frame

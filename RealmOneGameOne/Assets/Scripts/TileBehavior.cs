@@ -73,12 +73,12 @@ public class TileBehavior : MonoBehaviour
                         // update enemies paths.
                         foreach (GameObject enemy in GameController.enemies)
                         {
-                            enemy.GetComponent<MovementTest>().updateMyPath();
+                            enemy.GetComponent<EnemyBehavior>().updateMyPath();
                         }
 
                         // update global starting path
                         GameController.currentPath.Clear();
-                        GameController.currentPath = GameController.pathing.GetPath();
+                        GameController.currentPath = PathingLogic_Static.GetPath();
 
                 }
             }
@@ -99,10 +99,10 @@ public class TileBehavior : MonoBehaviour
                     getBuildingStatus();
                     foreach (GameObject enemy in GameController.enemies)
                     {
-                        enemy.GetComponent<MovementTest>().updateMyPath();
+                        enemy.GetComponent<EnemyBehavior>().updateMyPath();
                     }
                     GameController.currentPath.Clear();
-                    GameController.currentPath = GameController.pathing.GetPath();
+                    GameController.currentPath = PathingLogic_Static.GetPath();
                 }
 
             }
@@ -189,8 +189,8 @@ public class TileBehavior : MonoBehaviour
                 //Debug.Log("Last Tile Hit: " + enemy.GetComponent<MovementTest>().getLastTileHitInPath());
                 //Debug.Log("Next Tile Hit: " + enemy.GetComponent<MovementTest>().getNextTileInPath());
 
-                if (enemy.GetComponent<MovementTest>().getLastTileHitInPath() == thisTilePosition ||
-                    enemy.GetComponent<MovementTest>().getNextTileInPath() == thisTilePosition)
+                if (enemy.GetComponent<EnemyBehavior>().getLastTileHitInPath() == thisTilePosition ||
+                    enemy.GetComponent<EnemyBehavior>().getNextTileInPath() == thisTilePosition)
                 {
                     return false;
                 }

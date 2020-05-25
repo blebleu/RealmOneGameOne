@@ -15,9 +15,6 @@ public class TileMapLogic : MonoBehaviour
 
     public GameObject tile;
 
-    // REMOVE THIS LATER, THIS IS JUST TO TEST ENEMY MOVEMENT
-    public GameObject enemyTest;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,17 +37,14 @@ public class TileMapLogic : MonoBehaviour
             }
         }
 
-        HeroPathing pathing = new HeroPathing();
-        GameController.currentPath = GameController.pathing.GetPath();
+        //HeroPathing pathing = new HeroPathing();
+        GameController.currentPath = PathingLogic_Static.GetPath();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // THIS IS JUST A TEST OF SUMMONING ENEMIES AND GETTING THEM TO RECOGIZE THE MAP LOGIC
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Instantiate(enemyTest);
-        }
+
     }
 
     private void setTilePosition(GameObject tile, int i, int j) {

@@ -150,11 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18084976ccf6024497a284dac59d250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCols: 10
+  numCols: 15
   numRows: 10
   tile: {fileID: 5096506847081044359, guid: 516b9426d2231504d927c9ee3ddc259e, type: 3}
-  enemyTest: {fileID: 2457336687896348544, guid: 44d0496a1c1322a45afc202a0dd683da,
-    type: 3}
 --- !u!4 &1050831133
 Transform:
   m_ObjectHideFlags: 0
@@ -252,6 +250,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1763501069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2687405937827587266, guid: 9cc60987e7081dd47991c51edd9e698b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8202041509096822698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1763501070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763501069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5055a13929983da4e947d65b6c3a0ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBasic: {fileID: 490125018225074787, guid: 69b3e67888aeece49a2aba40fd139c89,
+    type: 3}
 --- !u!1 &1791500966
 GameObject:
   m_ObjectHideFlags: 0

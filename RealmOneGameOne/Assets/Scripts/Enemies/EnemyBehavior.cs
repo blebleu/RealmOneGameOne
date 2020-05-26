@@ -36,14 +36,17 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveAlongPath();
+        CheckHealth();
+        MoveAlongPath();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == GameController.PROJECTILE_TAG)
         {
+            ProjectileProperties projectileProperties = other.gameObject.GetComponent<ProjectileProperties>();
 
+            properties.health -= CalculateDamageFromEnemyTypeAndProjectileType(properties.type, projectileProperties.type);
         }
     }
 
@@ -83,7 +86,7 @@ public class EnemyBehavior : MonoBehaviour
             .position;
     }
 
-    void moveAlongPath() {
+    void MoveAlongPath() {
         // if hero has reached new destination
         if (Vector3.Distance(transform.position, currentMoveToLocation) < 1.0f)
         {
@@ -121,5 +124,16 @@ public class EnemyBehavior : MonoBehaviour
     }
     public Vector2 getNextTileInPath() {
         return myCurrentPath[currentPlaceInTileSequence];
+    }
+
+    public static int CalculateDamageFromEnemyTypeAndProjectileType(EnemyTypeEnum enemyType, ProjectileTypeEnum projectileType) {
+        return 0;
+    }
+
+    private void CheckHealth() {
+        if (properties.health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

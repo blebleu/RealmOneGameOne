@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ProjectileBehavior : MonoBehaviour
 {
+    public int speed;
+    public ProjectileTypeEnum type;
+    public int size;
+    public int baseDamage;
+
     // Start is called before the first frame update
     void Start()
     {

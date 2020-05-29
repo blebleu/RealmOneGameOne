@@ -12,9 +12,15 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    // PUBLIC PROPERTIES
+    public int health;
+    public int speed;
+    public int lookSpeed;
+    public int damage;
+    public EnemyTypeEnum type;
 
-    private EnemyProperties properties;
 
+    // PRIVATE VARS
     private List<Vector2> myCurrentPath;
 
     // tileSequence defines the sequence of tiles to traverse. 
@@ -36,7 +42,6 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckHealth();
         MoveAlongPath();
     }
 
@@ -44,9 +49,11 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (other.tag == GameController.PROJECTILE_TAG)
         {
-            ProjectileProperties projectileProperties = other.gameObject.GetComponent<ProjectileProperties>();
-
-            properties.health -= CalculateDamageFromEnemyTypeAndProjectileType(properties.type, projectileProperties.type);
+            if (other.gameObject.TryGetComponent<ProjectileBehavior>(out ProjectileBehavior projectileBehavior)) {
+                health -= CalculateDamageFromEnemyTypeAndProjectileType(type, projectileBehavior.type);
+                CheckHealth();
+            }
+                
         }
     }
 
@@ -57,8 +64,6 @@ public class EnemyBehavior : MonoBehaviour
 
 
     void init() {
-        // set properties, to reference movement properties (speed, lookspeed, etc.)
-        properties = gameObject.GetComponent<EnemyProperties>();
 
         // define current path based on global path set in gamecontroller
         myCurrentPath = GameController.currentPath;
@@ -96,7 +101,7 @@ public class EnemyBehavior : MonoBehaviour
         else
         {
             // move toward destination
-            transform.position = Vector3.MoveTowards(transform.position, currentMoveToLocation, properties.speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentMoveToLocation, speed * Time.deltaTime);
 
             // set look rotation
             travelToNewPointRotation = Quaternion.LookRotation(currentMoveToLocation - transform.position);
@@ -104,7 +109,7 @@ public class EnemyBehavior : MonoBehaviour
             travelToNewPointRotation.z = 0;
 
             // look at destination
-            transform.rotation = Quaternion.Lerp(transform.rotation, travelToNewPointRotation, properties.lookSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, travelToNewPointRotation, lookSpeed * Time.deltaTime);
         }
     }
 
@@ -127,11 +132,11 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     public static int CalculateDamageFromEnemyTypeAndProjectileType(EnemyTypeEnum enemyType, ProjectileTypeEnum projectileType) {
-        return 0;
+        return 10;
     }
 
     private void CheckHealth() {
-        if (properties.health <= 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }

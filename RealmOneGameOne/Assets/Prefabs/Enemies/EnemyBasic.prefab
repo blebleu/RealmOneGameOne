@@ -12,6 +12,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBasic
       objectReference: {fileID: 0}
+    - target: {fileID: 2457336687896348547, guid: 44d0496a1c1322a45afc202a0dd683da,
+        type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457336687896348547, guid: 44d0496a1c1322a45afc202a0dd683da,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457336687896348547, guid: 44d0496a1c1322a45afc202a0dd683da,
+        type: 3}
+      propertyPath: lookSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457336687896348547, guid: 44d0496a1c1322a45afc202a0dd683da,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2457336687896348551, guid: 44d0496a1c1322a45afc202a0dd683da,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82,5 +102,6 @@ PrefabInstance:
       propertyPath: lookSpeed
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7042725166448891074, guid: 44d0496a1c1322a45afc202a0dd683da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44d0496a1c1322a45afc202a0dd683da, type: 3}

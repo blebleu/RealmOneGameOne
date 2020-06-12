@@ -131,7 +131,11 @@ public class TileBehavior : MonoBehaviour
         }
         else if(isBlocking == true && currentBuilding == null)
         {
-            currentBuilding = Instantiate(testBuilding, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            float yInstantiate = transform.position.y;
+            if (testBuilding.TryGetComponent<TowerBehavior>(out TowerBehavior towerBehavior)){
+                yInstantiate = towerBehavior.model.transform.localScale.y / 2f;
+            }
+            currentBuilding = Instantiate(testBuilding, new Vector3(transform.position.x, yInstantiate, transform.position.z), Quaternion.identity);
         }
     }
 

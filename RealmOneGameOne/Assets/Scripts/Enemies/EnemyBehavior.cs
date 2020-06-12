@@ -42,7 +42,9 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveAlongPath();
+        if (myCurrentPath.Count > 0) {
+            MoveAlongPath();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -51,6 +53,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (other.gameObject.TryGetComponent<ProjectileBehavior>(out ProjectileBehavior projectileBehavior)) {
                 health -= CalculateDamageFromEnemyTypeAndProjectileType(type, projectileBehavior.type);
+                Destroy(other.gameObject);
                 CheckHealth();
             }
                 
@@ -68,7 +71,10 @@ public class EnemyBehavior : MonoBehaviour
         // define current path based on global path set in gamecontroller
         myCurrentPath = GameController.currentPath;
         currentPlaceInTileSequence = 0;
-        setNextMoveToLocation();
+
+        if (myCurrentPath.Count > 0) {
+            setNextMoveToLocation();
+        }
     }
 
     public void setNextMoveToLocation() {

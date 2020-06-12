@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     // global list of tags to mitigate spelling errors, because referencing by string values is very bad no good
     public static readonly string PROJECTILE_TAG = "Projectile";
+    public static readonly string ENEMY_TAG = "Enemy";
 
     // list of enemies currently in the scene
     public static List<GameObject> enemies = new List<GameObject>();

@@ -10,16 +10,16 @@ public class TowerBehavior : MonoBehaviour
     public GameObject model;
     public GameObject detectionRadius;
     public GameObject projectile;
+    public int cost;
 
     float radius;
 
-    /*
-     * timer that controls time between shots. Rate of fire expressed in shots / min, so divide 60 by rate of fire to get seconds
-     * between shots.
-     */
-
     public GameObject currentTarget = null;
 
+    /*
+    * timer that controls time between shots. Rate of fire expressed in shots / min, so divide 60 by rate of fire to get seconds
+    * between shots.
+    */
     private float shootTimer;
 
     void Awake() {

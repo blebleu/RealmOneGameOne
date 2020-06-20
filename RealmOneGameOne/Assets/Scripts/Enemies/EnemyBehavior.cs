@@ -84,6 +84,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if (currentPlaceInTileSequence > myCurrentPath.ToArray().Length-1) {
             Debug.Log("HIT DESTINATION");
+            GameController.ChangeBaseHealthBy(-1 * damage);
             Destroy(gameObject);
             return;
         }
@@ -144,6 +145,7 @@ public class EnemyBehavior : MonoBehaviour
     private void CheckHealth() {
         if (health <= 0)
         {
+            GameController.ChangeCreditsBy(10);
             Destroy(gameObject);
         }
     }

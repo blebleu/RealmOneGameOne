@@ -113,7 +113,7 @@ MonoBehaviour:
   tileMouseOverMaterialBadLocation: {fileID: 2100000, guid: 26c9edd1a18172b4f899d0b96c2c0f0b,
     type: 2}
   tileBlockMaterial: {fileID: 2100000, guid: 2826a31d303068842ab1fcdccd96d76c, type: 2}
-  testBuilding: {fileID: 3898425805008581172, guid: 07bd14711acc3034cb6dbf70be874db5,
+  testBuilding: {fileID: 58810463005049648, guid: 2a42fcd31e769ce43999d44806e8fcda,
     type: 3}
   isHeroDestination: 0
   isBlocking: 0

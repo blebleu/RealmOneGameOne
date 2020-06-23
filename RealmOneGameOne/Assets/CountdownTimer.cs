@@ -15,9 +15,7 @@ public class CountdownTimer : MonoBehaviour
 
      void Start()
      {
-
          currentTime = startingTime;
-
      }
         
     void Update()

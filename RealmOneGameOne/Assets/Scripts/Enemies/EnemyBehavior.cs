@@ -12,9 +12,15 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    // PUBLIC PROPERTIES
+    public int health;
+    public int speed;
+    public int lookSpeed;
+    public int damage;
+    public EnemyTypeEnum type;
 
-    private EnemyProperties properties;
 
+    // PRIVATE VARS
     private List<Vector2> myCurrentPath;
 
     // tileSequence defines the sequence of tiles to traverse. 
@@ -36,14 +42,21 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveAlongPath();
+        if (myCurrentPath.Count > 0) {
+            MoveAlongPath();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == GameController.PROJECTILE_TAG)
         {
-
+            if (other.gameObject.TryGetComponent<ProjectileBehavior>(out ProjectileBehavior projectileBehavior)) {
+                health -= CalculateDamageFromEnemyTypeAndProjectileType(type, projectileBehavior.type);
+                Destroy(other.gameObject);
+                CheckHealth();
+            }
+                
         }
     }
 
@@ -54,13 +67,14 @@ public class EnemyBehavior : MonoBehaviour
 
 
     void init() {
-        // set properties, to reference movement properties (speed, lookspeed, etc.)
-        properties = gameObject.GetComponent<EnemyProperties>();
 
         // define current path based on global path set in gamecontroller
         myCurrentPath = GameController.currentPath;
         currentPlaceInTileSequence = 0;
-        setNextMoveToLocation();
+
+        if (myCurrentPath.Count > 0) {
+            setNextMoveToLocation();
+        }
     }
 
     public void setNextMoveToLocation() {
@@ -70,6 +84,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if (currentPlaceInTileSequence > myCurrentPath.ToArray().Length-1) {
             Debug.Log("HIT DESTINATION");
+            GameController.ChangeBaseHealthBy(-1 * damage);
             Destroy(gameObject);
             return;
         }
@@ -83,7 +98,7 @@ public class EnemyBehavior : MonoBehaviour
             .position;
     }
 
-    void moveAlongPath() {
+    void MoveAlongPath() {
         // if hero has reached new destination
         if (Vector3.Distance(transform.position, currentMoveToLocation) < 1.0f)
         {
@@ -93,7 +108,7 @@ public class EnemyBehavior : MonoBehaviour
         else
         {
             // move toward destination
-            transform.position = Vector3.MoveTowards(transform.position, currentMoveToLocation, properties.speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentMoveToLocation, speed * Time.deltaTime);
 
             // set look rotation
             travelToNewPointRotation = Quaternion.LookRotation(currentMoveToLocation - transform.position);
@@ -101,7 +116,7 @@ public class EnemyBehavior : MonoBehaviour
             travelToNewPointRotation.z = 0;
 
             // look at destination
-            transform.rotation = Quaternion.Lerp(transform.rotation, travelToNewPointRotation, properties.lookSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, travelToNewPointRotation, lookSpeed * Time.deltaTime);
         }
     }
 
@@ -121,5 +136,17 @@ public class EnemyBehavior : MonoBehaviour
     }
     public Vector2 getNextTileInPath() {
         return myCurrentPath[currentPlaceInTileSequence];
+    }
+
+    public static int CalculateDamageFromEnemyTypeAndProjectileType(EnemyTypeEnum enemyType, ProjectileTypeEnum projectileType) {
+        return 10;
+    }
+
+    private void CheckHealth() {
+        if (health <= 0)
+        {
+            GameController.ChangeCreditsBy(10);
+            Destroy(gameObject);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /*
 This is the primary game controller.
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
 
     public static float towerSellMultiplier = 0.4f;
 
+    private bool paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +44,22 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = togglePause();
+        }
+    }
 
+    void OnGUI()
+    {
+        if (paused)
+        {
+            GUILayout.Label("Game is paused!");
+            if (GUILayout.Button("Click me to unpause"))
+                paused = togglePause();
+            if (GUILayout.Button("Quit to Main")) {
+                SceneManager.LoadScene("StartScene");
+            }
+        }
     }
 
     /* We don't want a class to be able to say GameController.credits = [variable], because we can't
@@ -65,7 +83,19 @@ public class GameController : MonoBehaviour
         return baseHealth;
     }
 
-    
+    bool togglePause() {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+            return false;
+        }
+        else {
+            Time.timeScale = 0f;
+            return true;
+        }  
+    }
 
-
+    public bool isPaused() {
+        return paused;
+    }
 }

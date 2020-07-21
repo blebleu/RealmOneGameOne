@@ -14,7 +14,9 @@ public class TileBehavior : MonoBehaviour
     public Material tileMouseOverMaterial;
     public Material tileMouseOverMaterialBadLocation;
     public Material tileBlockMaterial;
-    public GameObject testBuilding;
+    public GameObject tower;
+    public GameObject obstructionTestObject;
+    public GameObject baseTower;
 
     // protected tiles can be moved through by enemies but cannot have towers placed on them,
     // includes start and end points for enemy paths
@@ -145,14 +147,14 @@ public class TileBehavior : MonoBehaviour
         }
         else if(currentBuilding == null)
         {
-            if (testBuilding.TryGetComponent<TowerBehavior>(out TowerBehavior towerBehavior)){
+            if (tower.TryGetComponent<TowerBehavior>(out TowerBehavior towerBehavior)){
 
                 // if you have enough credits to purchase tower:
                 if (GameController.GetCurrentCredits() - towerBehavior.cost >= 0)
                 {
                     // instantiate tower
                     float yInstantiate = towerBehavior.model.transform.localScale.y / 2f;
-                    currentBuilding = Instantiate(testBuilding, new Vector3(transform.position.x, yInstantiate, transform.position.z), Quaternion.identity);
+                    currentBuilding = Instantiate(tower, new Vector3(transform.position.x, yInstantiate, transform.position.z), Quaternion.identity);
 
                     // remove credits
                     GameController.ChangeCreditsBy(-1 * towerBehavior.cost);
@@ -253,5 +255,16 @@ public class TileBehavior : MonoBehaviour
         }
 
         isValidTowerLocation = true;
+    }
+    public void makeObstruction() {
+        if (!isBlocking && !isProtectedTile) {
+            // spawn model of obstruction here
+            Instantiate(obstructionTestObject, transform);
+            isBlocking = true;
+        }
+    }
+    public void makeBase() {
+        Instantiate(baseTower, transform);
+        isProtectedTile = true;
     }
 }

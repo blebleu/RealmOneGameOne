@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetStaticValues();
     }
 
     // Update is called once per frame
@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
             if (GUILayout.Button("Click me to unpause"))
                 paused = togglePause();
             if (GUILayout.Button("Quit to Main")) {
+                paused = togglePause();
                 SceneManager.LoadScene("StartScene");
             }
         }
@@ -78,6 +79,9 @@ public class GameController : MonoBehaviour
     public static void ChangeBaseHealthBy(int healthToAdd) {
         baseHealth += healthToAdd;
         baseHealthChangeEvent.Invoke();
+        if (baseHealth <= 0) {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
     public static int GetCurrentBaseHealth() {
         return baseHealth;
@@ -97,5 +101,17 @@ public class GameController : MonoBehaviour
 
     public bool isPaused() {
         return paused;
+    }
+
+    private void ResetStaticValues() {
+        positionMap = new Dictionary<Vector2, TileBehavior>();
+        currentPath = new List<Vector2>();
+        enemies = new List<GameObject>();
+        ChangeBaseHealthBy(100 - baseHealth);
+        ChangeCreditsBy(100 - credits);
+        baseHealth = 100;
+        waveNumber = 0;
+        enemiesRemaining = 0;
+        paused = false;
     }
 }
